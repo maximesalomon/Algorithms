@@ -3,15 +3,15 @@
 import argparse
 
 def find_max_profit(prices):
-  stock_max = max(prices)
-  stock_max_index = prices.index(stock_max)
-  if stock_max_index == 0:
-    stock_max = max(prices[1:])
-    stock_max_index = prices.index(stock_max)
-  stock_max_index = prices.index(stock_max)  
-  other_stocks = prices[0:stock_max_index]  
-  stock_min = min(other_stocks)
-  max_profit = stock_max - stock_min
+  if len(prices) <= 1:
+    return 0
+  else: 
+    max_profit = prices[len(prices) - 1] - prices[len(prices) - 2]
+    for x in range(1, len(prices)):
+      for y in range(x + 1, len(prices)):
+        profit = prices[y] - prices[x]
+        if profit > max_profit:
+          max_profit = profit
   return max_profit
 
 print(find_max_profit([1050, 270, 1540, 3800, 2]))
